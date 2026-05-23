@@ -76,9 +76,12 @@ chrome.runtime.onMessage.addListener((msg) => {
 });
 
 // Check storage and auto-enable if the user had it turned on
-chrome.storage.local.get(['bionicEnabled'], ({ bionicEnabled }) => {
-  if (bionicEnabled) {
+chrome.storage.local.get(['enableFeature'], ({ enableFeature }) => {
+  if (enableFeature) {
     enabled = true;
-    window.addEventListener('load', enable);
-    }
-  });
+    enable();
+    setTimeout(() => walkTree(document.body), 500);
+    setTimeout(() => walkTree(document.body), 1500);
+    setTimeout(() => walkTree(document.body), 3000);
+  }
+});
