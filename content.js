@@ -5,6 +5,7 @@ const SKIP_TAGS = new Set([
 ]);
 
 const ATTR = 'data-bionic'; 
+let enabled = false;
 let observer = null; 
 
 // Bold the first half of a single word
@@ -76,5 +77,8 @@ chrome.runtime.onMessage.addListener((msg) => {
 
 // Check storage and auto-enable if the user had it turned on
 chrome.storage.local.get(['bionicEnabled'], ({ bionicEnabled }) => {
-  if (bionicEnabled) { enabled = true; enable(); }
-});
+  if (bionicEnabled) {
+    enabled = true;
+    window.addEventListener('load', enable);
+    }
+  });
